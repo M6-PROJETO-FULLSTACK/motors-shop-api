@@ -1,10 +1,10 @@
 export interface IGalleryRequest {
     url: string;
-    vehicleId: string;
+    vehicleId?: string;
 }
 
 export interface IGallery extends IGalleryRequest {
-    id: string;
+    id?: string;
 }
 
 export interface IGalleryUpdate {
