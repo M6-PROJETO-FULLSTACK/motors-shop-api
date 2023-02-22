@@ -13,9 +13,12 @@ const deleteVehicleService = async (id: string, userId: string) => {
       user: true,
     },
   });
-  if (!findVehicle) {
+
+  if (findVehicle.length < 1) {
     throw new AppError("Vehicle not found", 404);
   }
+
+  console.log(findVehicle);
 
   if (findVehicle[0].user.id != userId) {
     throw new AppError("You're not the owner of this vehicle", 401);

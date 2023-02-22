@@ -31,10 +31,6 @@ const createVehicleService = async (
     throw new AppError("User not found", 404);
   }
 
-  const newGallery = galleryRepository.create({
-    url: gallery[0].url,
-  });
-
   const newVehicle = vehicleRepository.create({
     advertiseType,
     title,
@@ -44,7 +40,6 @@ const createVehicleService = async (
     description,
     vehicleType,
     cover,
-    gallery: newGallery,
     user,
   });
 
@@ -55,6 +50,13 @@ const createVehicleService = async (
       id: newVehicle.id,
     },
   });
+
+  const newGallery = galleryRepository.create({
+    url: gallery[0].url,
+    vehicle_id: vehicle!.id,
+  });
+
+  vehicle!.gallery = newGallery;
 
   return vehicle!;
 };
