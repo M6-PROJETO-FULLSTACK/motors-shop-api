@@ -6,59 +6,33 @@ import AppError from "../../errors/appError";
 import { IVehicleRequest } from "../../interfaces/Vehicle";
 
 const createVehicleService = async (
-  userId: string,
-  {
-    advertiseType,
-    title,
-    year,
-    mileage,
-    price,
-    description,
-    vehicleType,
-    cover,
-    gallery,
-  }: IVehicleRequest
+	userId: string,
+	{ advertiseType, title, year, mileage, price, description, vehicleType, cover, gallery }: IVehicleRequest
 ): Promise<Vehicle> => {
-  const vehicleRepository = AppDataSource.getRepository(Vehicle);
-  const galleryRepository = AppDataSource.getRepository(Gallery);
-  const userRepository = AppDataSource.getRepository(User);
+	const vehicleRepository = AppDataSource.getRepository(Vehicle);
+	const galleryRepository = AppDataSource.getRepository(Gallery);
 
-  const user = await userRepository.findOneBy({
-    id: userId,
-  });
+	const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
+	if (!user) throw new AppError("User not found", 404);
 
-  if (!user) {
-    throw new AppError("User not found", 404);
-  }
+	const vehicle = vehicleRepository.create({
+		advertiseType,
+		title,
+		year,
+		mileage,
+		price,
+		description,
+		vehicleType,
+		cover,
+		user,
+	});
 
-  const newVehicle = vehicleRepository.create({
-    advertiseType,
-    title,
-    year,
-    mileage,
-    price,
-    description,
-    vehicleType,
-    cover,
-    user,
-  });
+	const galleryImages = gallery.map((image) => galleryRepository.create({ url: image.url, vehicle_id: vehicle.id }));
 
-  await vehicleRepository.save(newVehicle);
+	vehicle.galleryImages = galleryImages;
 
-  const vehicle = await vehicleRepository.findOne({
-    where: {
-      id: newVehicle.id,
-    },
-  });
-
-  const newGallery = galleryRepository.create({
-    url: gallery[0].url,
-    vehicle_id: vehicle!.id,
-  });
-
-  vehicle!.gallery = newGallery;
-
-  return vehicle!;
+	await vehicleRepository.save(vehicle);
+	return vehicle;
 };
 
 export default createVehicleService;
