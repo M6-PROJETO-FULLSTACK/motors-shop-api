@@ -1,5 +1,5 @@
-import { Vehicle } from "../../entities/vehicles.entities";
 import AppDataSource from "../../data-source";
+import { Vehicle } from "../../entities/vehicles.entities";
 import AppError from "../../errors/appError";
 
 const listOneVehicleService = async (id:string) => {

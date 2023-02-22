@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import listVehiclesService from "../services/vehicles/listVehicles.service";
 import listOneVehicleService from "../services/vehicles/listOneVehicle.service";
+import listVehiclesService from "../services/vehicles/listVehicles.service";
 
 export const listVehiclesController = async (req:Request, res:Response) => {
     const vehicles = await listVehiclesService()    
