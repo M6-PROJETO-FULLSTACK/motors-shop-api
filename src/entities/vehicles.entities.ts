@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Gallery } from "./galleries.entities";
 import { User } from "./users.entities";
 
@@ -37,10 +37,9 @@ export class Vehicle {
 	@UpdateDateColumn()
 	updated_at: Date;
 
-	@ManyToOne(() => User, user => user.vehicles)
+	@ManyToOne(() => User, (user) => user.vehicles)
 	user: User;
 
-	@OneToOne(() => Gallery, { eager: true })
-	@JoinColumn()
-	gallery: Gallery;
+	@OneToMany(() => Gallery, (image) => image.vehicle)
+	galleryImages: Gallery[];
 }

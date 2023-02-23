@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Vehicle } from "./vehicles.entities";
 
 @Entity("galleries")
 export class Gallery {
@@ -10,4 +11,7 @@ export class Gallery {
 
 	@Column()
 	vehicle_id: string;
+
+	@ManyToOne(() => Vehicle, (vehicle) => vehicle.galleryImages)
+	vehicle: Vehicle;
 }
