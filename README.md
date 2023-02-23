@@ -101,12 +101,12 @@ Return [201 CREATED]
       {
         "id": 1,
         "url": "https://example.com/image1.jpg",
-        "alt": "Image 1"
+        "vehicle_id": 1
       },
       {
         "id": 2,
         "url": "https://example.com/image2.jpg",
-        "alt": "Image 2"
+        "vehicle_id": 1
       }
     ],
     "createdAt": "2023-02-23T12:34:56.000Z",
