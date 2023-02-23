@@ -1,6 +1,6 @@
 # Motors Shop API
 
-The Motors Shop API is a simple RESTful API that allows you to create, read, update, and delete vehicle advertisements The API is built using Node.js, Express and TypeORM. For the database, it uses PostgreSQL.
+The Motors Shop API is a simple RESTful API that allows you to create, read, update, and delete vehicle advertisements. The API is built using Node.js, Express and TypeORM. For the database, it uses PostgreSQL.
 
 ## GETTING STARTED
 
