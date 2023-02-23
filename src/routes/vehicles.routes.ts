@@ -1,6 +1,7 @@
 import { Router } from "express";
 import handleErrorMiddleware from "../middlewares/handleError.middleware";
-import { listVehiclesController, listOneVehicleController } from "../controllers/vehicles.controllers";
+import listVehiclesController from "../controllers/vehicles/listVehicles.controller";
+import listOneVehicleController from "../controllers/vehicles/listOneVehicle.controller";
 
 const vehiclesRoutes = Router();
 
