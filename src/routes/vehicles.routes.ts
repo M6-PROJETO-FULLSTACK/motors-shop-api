@@ -7,7 +7,7 @@ import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
 
 const vehiclesRoutes = Router();
 
-vehiclesRoutes.post("", ensureAuthMiddleware, createVehiclesControllers);
-vehiclesRoutes.delete("/:id", ensureAuthMiddleware, deleteVehicleController);
+vehiclesRoutes.post("", createVehiclesControllers);
+vehiclesRoutes.delete("/:id", deleteVehicleController);
 
 export default vehiclesRoutes;

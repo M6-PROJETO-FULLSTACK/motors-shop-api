@@ -6,7 +6,7 @@ import AppError from "../../errors/appError";
 import { IVehicleRequest } from "../../interfaces/Vehicle";
 
 const createVehicleService = async (
-  userId: string,
+  // userId: string,
   {
     advertiseType,
     title,
@@ -23,13 +23,13 @@ const createVehicleService = async (
   const galleryRepository = AppDataSource.getRepository(Gallery);
   const userRepository = AppDataSource.getRepository(User);
 
-  const user = await userRepository.findOneBy({
-    id: userId,
-  });
+  // const user = await userRepository.findOneBy({
+  //   id: userId,
+  // });
 
-  if (!user) {
-    throw new AppError("User not found", 404);
-  }
+  // if (!user) {
+  //   throw new AppError("User not found", 404);
+  // }
 
   const newVehicle = vehicleRepository.create({
     advertiseType,
@@ -40,7 +40,7 @@ const createVehicleService = async (
     description,
     vehicleType,
     cover,
-    user,
+    // user,
   });
 
   await vehicleRepository.save(newVehicle);
@@ -51,12 +51,20 @@ const createVehicleService = async (
     },
   });
 
-  const newGallery = galleryRepository.create({
-    url: gallery[0].url,
+  await Promise.all(
+    gallery.map(async (elem: any) => {
+      const teste = galleryRepository.create({
+        url: elem.url,
+        vehicle_id: vehicle!.id,
+      });
+
+      await galleryRepository.save(teste);
+    })
+  );
+
+  const findGallery = await galleryRepository.findBy({
     vehicle_id: vehicle!.id,
   });
-
-  vehicle!.gallery = newGallery;
 
   return vehicle!;
 };
