@@ -21,17 +21,11 @@ const createVehicleService = async (
 ): Promise<Vehicle> => {
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
   const galleryRepository = AppDataSource.getRepository(Gallery);
-  const userRepository = AppDataSource.getRepository(User);
 
-  // const user = await userRepository.findOneBy({
-  //   id: userId,
-  // });
+  // const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
+  // if (!user) throw new AppError("User not found", 404);
 
-  // if (!user) {
-  //   throw new AppError("User not found", 404);
-  // }
-
-  const newVehicle = vehicleRepository.create({
+  const vehicle = vehicleRepository.create({
     advertiseType,
     title,
     year,
@@ -43,30 +37,27 @@ const createVehicleService = async (
     // user,
   });
 
-  await vehicleRepository.save(newVehicle);
-
-  const vehicle = await vehicleRepository.findOne({
-    where: {
-      id: newVehicle.id,
-    },
-  });
+  await vehicleRepository.save(vehicle);
 
   await Promise.all(
-    gallery.map(async (elem: any) => {
-      const teste = galleryRepository.create({
-        url: elem.url,
-        vehicle_id: vehicle!.id,
+    gallery.map(async (image) => {
+      const newGallery = galleryRepository.create({
+        url: image.url,
+        vehicle_id: vehicle.id,
       });
-
-      await galleryRepository.save(teste);
+      await galleryRepository.save(newGallery);
     })
   );
 
-  const findGallery = await galleryRepository.findBy({
-    vehicle_id: vehicle!.id,
+  const findGallery = await galleryRepository.find({
+    where: {
+      vehicle_id: vehicle.id,
+    },
   });
 
-  return vehicle!;
+  vehicle.galleryImages = findGallery;
+
+  return vehicle;
 };
 
 export default createVehicleService;
