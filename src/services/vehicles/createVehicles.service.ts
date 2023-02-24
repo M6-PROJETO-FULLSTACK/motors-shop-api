@@ -6,33 +6,58 @@ import AppError from "../../errors/appError";
 import { IVehicleRequest } from "../../interfaces/Vehicle";
 
 const createVehicleService = async (
-	userId: string,
-	{ advertiseType, title, year, mileage, price, description, vehicleType, cover, gallery }: IVehicleRequest
+  // userId: string,
+  {
+    advertiseType,
+    title,
+    year,
+    mileage,
+    price,
+    description,
+    vehicleType,
+    cover,
+    gallery,
+  }: IVehicleRequest
 ): Promise<Vehicle> => {
-	const vehicleRepository = AppDataSource.getRepository(Vehicle);
-	const galleryRepository = AppDataSource.getRepository(Gallery);
+  const vehicleRepository = AppDataSource.getRepository(Vehicle);
+  const galleryRepository = AppDataSource.getRepository(Gallery);
 
-	const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
-	if (!user) throw new AppError("User not found", 404);
+  // const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
+  // if (!user) throw new AppError("User not found", 404);
 
-	const vehicle = vehicleRepository.create({
-		advertiseType,
-		title,
-		year,
-		mileage,
-		price,
-		description,
-		vehicleType,
-		cover,
-		user,
-	});
+  const vehicle = vehicleRepository.create({
+    advertiseType,
+    title,
+    year,
+    mileage,
+    price,
+    description,
+    vehicleType,
+    cover,
+    // user,
+  });
 
-	const galleryImages = gallery.map((image) => galleryRepository.create({ url: image.url, vehicle_id: vehicle.id }));
+  await vehicleRepository.save(vehicle);
 
-	vehicle.galleryImages = galleryImages;
+  await Promise.all(
+    gallery.map(async (image) => {
+      const newGallery = galleryRepository.create({
+        url: image.url,
+        vehicle_id: vehicle.id,
+      });
+      await galleryRepository.save(newGallery);
+    })
+  );
 
-	await vehicleRepository.save(vehicle);
-	return vehicle;
+  const findGallery = await galleryRepository.find({
+    where: {
+      vehicle_id: vehicle.id,
+    },
+  });
+
+  vehicle.galleryImages = findGallery;
+
+  return vehicle;
 };
 
 export default createVehicleService;
