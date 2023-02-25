@@ -1,23 +1,25 @@
-import { IGallery } from "../Gallery";
+import { Adress } from "../../entities/adresses.entities";
+import { Vehicle } from "../../entities/vehicles.entities";
+import { Comment } from "../../entities/comments.entities";
 
 export interface IUserRequest {
-	advertiseType: boolean;
-	title: string;
-	year: string;
-	mileage: string;
-	price: number;
-	description: string;
-	vehicleType: boolean;
-	cover: string;
-	isActive: boolean;
-	gallery: IGallery[];
+	name: string;
+	email: string;
+	password: string;
+	cpf: string;
+	phone: string;
+	birthdate: Date;
+	bio: string;
+	type: boolean;
+	adress: Adress;
 }
 
 export interface IUser extends IUserRequest {
 	id?: string;
 	createdAt: string;
 	updatedAt: string;
+	vehicles?: Vehicle[];
+	comments?: Comment[];
 }
 
-export interface IUserUpdate extends Partial<IUserRequest> {}
-
+export interface IUserUpdate extends Partial<IUserRequest> { }
