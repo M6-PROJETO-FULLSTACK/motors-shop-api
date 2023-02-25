@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from "typeorm";
 import { Gallery } from "./galleries.entities";
 import { User } from "./users.entities";
+import { Comment } from "./comments.entities";
 
 @Entity("vehicles")
 export class Vehicle {
@@ -31,6 +32,9 @@ export class Vehicle {
 	@Column()
 	cover: string;
 
+	@Column()
+	isActive: boolean;
+
 	@CreateDateColumn()
 	created_at: Date;
 
@@ -42,4 +46,7 @@ export class Vehicle {
 
 	@OneToMany(() => Gallery, (image) => image.vehicle)
 	galleryImages: Gallery[];
+
+	@OneToMany(() => Comment, (comment) => comment.vehicle)
+	comments: Comment[];
 }

@@ -20,6 +20,6 @@ export class Adress {
 	@Column()
 	number: string;
 
-	@Column()
+	@Column({ nullable: true })
 	complement: string;
 }

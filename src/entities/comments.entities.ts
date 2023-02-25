@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm";
 import { User } from "./users.entities";
+import { Vehicle } from "./vehicles.entities";
 
 @Entity("comments")
 export class Comment {
@@ -23,4 +24,7 @@ export class Comment {
 
 	@ManyToOne(() => User, (user) => user.comments)
 	user: User;
+
+	@ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)
+	vehicle: Vehicle;
 }
