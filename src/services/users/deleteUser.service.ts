@@ -2,7 +2,7 @@ import AppDataSource from "../../data-source";
 import { User } from "../../entities/users.entities";
 import AppError from "../../errors/appError";
 
-const DeleteUserService = async (id: string) => {
+const deleteUserService = async (id: string) => {
     const userRepository = AppDataSource.getRepository(User);
 
     const user = await userRepository.findOneBy({ id });
@@ -16,3 +16,4 @@ const DeleteUserService = async (id: string) => {
     return true;
 }
 
+export default deleteUserService;

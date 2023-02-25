@@ -5,7 +5,7 @@ import { User } from "../../entities/users.entities";
 import { IUserRequest } from "../../interfaces/User";
 import { Adress } from "../../entities/adresses.entities";
 
-const CreateUserService = async ({ name, email, password, cpf, phone, birthdate, bio, type, adress }: IUserRequest) => {
+const createUserService = async ({ name, email, password, cpf, phone, birthdate, bio, type, adress }: IUserRequest) => {
 	const userRepository = AppDataSource.getRepository(User);
 	const adressRepository = AppDataSource.getRepository(Adress);
 
@@ -37,4 +37,4 @@ const CreateUserService = async ({ name, email, password, cpf, phone, birthdate,
 	return user;
 };
 
-export default CreateUserService;
+export default createUserService;

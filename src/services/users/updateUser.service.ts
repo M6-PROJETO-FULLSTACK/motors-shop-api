@@ -4,7 +4,7 @@ import { IUserUpdate } from "../../interfaces/User";
 import AppDataSource from "../../data-source";
 import AppError from "../../errors/appError";
 
-const UpdateUserService = async (id: string, data: IUserUpdate) => {
+const updateUserService = async (id: string, data: IUserUpdate) => {
 	const userRepository = AppDataSource.getRepository(User);
 
 	const user = await userRepository.findOneBy({ id });
@@ -27,4 +27,4 @@ const UpdateUserService = async (id: string, data: IUserUpdate) => {
 	return updatedUser;
 };
 
-export default UpdateUserService;
+export default updateUserService;
