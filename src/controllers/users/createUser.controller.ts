@@ -9,3 +9,5 @@ const createUserController = async (req: Request, res: Response) => {
 
     return res.status(201).json(instanceToPlain(user));
 };
+
+export default createUserController;
