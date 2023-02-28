@@ -13,7 +13,7 @@ const vehiclesRoutes = Router();
 vehiclesRoutes.get("", handleErrorMiddleware, listVehiclesController);
 vehiclesRoutes.get("/:id", handleErrorMiddleware, listOneVehicleController);
 
-vehiclesRoutes.post("", ensureAuthMiddleware, createVehiclesControllers);
+vehiclesRoutes.post("", createVehiclesControllers);
 vehiclesRoutes.delete("/:id", ensureAuthMiddleware, deleteVehicleController);
 vehiclesRoutes.patch("/:id", ensureAuthMiddleware, updateVehiclesController);
 
