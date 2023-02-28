@@ -9,6 +9,7 @@ export interface IVehicleRequest {
   description: string;
   vehicleType: boolean;
   cover: string;
+  isActive: boolean;
   gallery: IGallery[];
 }
 
