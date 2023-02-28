@@ -22,4 +22,9 @@ export interface IUser extends IUserRequest {
 	comments?: Comment[];
 }
 
+export interface IUserLogin{
+	email: string;
+	password: string;
+}
+
 export interface IUserUpdate extends Partial<IUserRequest> { }
