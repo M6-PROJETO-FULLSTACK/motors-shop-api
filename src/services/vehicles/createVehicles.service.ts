@@ -6,7 +6,7 @@ import AppError from "../../errors/appError";
 import { IVehicleRequest } from "../../interfaces/Vehicle";
 
 const createVehicleService = async (
-  // userId: string,
+  userId: string,
   {
     advertiseType,
     title,
@@ -23,8 +23,10 @@ const createVehicleService = async (
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
   const galleryRepository = AppDataSource.getRepository(Gallery);
 
-  // const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
-  // if (!user) throw new AppError("User not found", 404);
+  const user = await AppDataSource.getRepository(User).findOneBy({
+    id: userId,
+  });
+  if (!user) throw new AppError("User not found", 404);
 
   const vehicle = vehicleRepository.create({
     advertiseType,
@@ -36,7 +38,7 @@ const createVehicleService = async (
     vehicleType,
     cover,
     isActive,
-    // user,
+    user,
   });
 
   await vehicleRepository.save(vehicle);
