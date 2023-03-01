@@ -6,9 +6,9 @@ export const createVehiclesControllers = async (
   res: Response
 ) => {
   const data = req.body;
-  // const userId = req.user.id;
+  const userId = req.user.id;
 
-  const annoucement = await createVehicleService(data);
+  const annoucement = await createVehicleService(userId, data);
 
   return res.status(201).json(annoucement);
 };

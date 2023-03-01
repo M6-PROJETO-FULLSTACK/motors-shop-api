@@ -7,8 +7,11 @@ import handleErrorMiddleware from "./middlewares/handleError.middleware";
 import commentsRoutes from "./routes/comments.routes";
 import LoginRoute from "./routes/login.routes";
 
+const cors = require("cors");
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 app.use("/vehicles", vehiclesRoutes);
 app.use("/users", usersRoutes);
