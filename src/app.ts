@@ -6,12 +6,15 @@ import usersRoutes from "./routes/users.routes";
 import handleErrorMiddleware from "./middlewares/handleError.middleware";
 import LoginRoute from "./routes/login.routes";
 
+const cors = require("cors");
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 app.use("/vehicles", vehiclesRoutes);
 app.use("/users", usersRoutes);
-app.use("/login", LoginRoute)
+app.use("/login", LoginRoute);
 
 app.use(handleErrorMiddleware);
 
