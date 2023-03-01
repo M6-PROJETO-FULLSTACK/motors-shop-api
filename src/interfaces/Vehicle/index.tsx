@@ -10,6 +10,7 @@ export interface IVehicleRequest {
   vehicleType: boolean;
   cover: string;
   gallery: IGallery[];
+  isActive: boolean;
 }
 
 export interface IVehicle extends IVehicleRequest {
