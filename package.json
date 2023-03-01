@@ -11,6 +11,7 @@
 		"test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose --maxWorkers=1 --forceExit"
 	},
 	"devDependencies": {
+		"@types/cors": "^2.8.13",
 		"@types/express": "^4.17.13",
 		"@types/jest": "^28.1.4",
 		"@types/nodemailer": "^6.4.7",

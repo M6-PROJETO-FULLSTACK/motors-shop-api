@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import "express-async-errors";
 import express from "express";
+import  cors from 'cors'
 import vehiclesRoutes from "./routes/vehicles.routes";
 import usersRoutes from "./routes/users.routes";
 import handleErrorMiddleware from "./middlewares/handleError.middleware";
