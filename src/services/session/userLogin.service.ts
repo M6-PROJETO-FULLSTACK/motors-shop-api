@@ -9,12 +9,12 @@ const userLoginService = async ({email, password}:IUserLogin) => {
     const userRepository = AppDataSource.getRepository(User)
     const users = await userRepository.find()
 
-    const account = users.find(user => user.email === email)
+    const user = users.find(user => user.email === email)
 
-    if(!account){
+    if(!user){
         throw new AppError('Wrong email or password', 401)
     }
-    if(!bcrypt.compareSync(password, account.password)){
+    if(!bcrypt.compareSync(password, user.password)){
         throw new AppError('Wrong email or password', 401)
     }
 
@@ -24,7 +24,7 @@ const userLoginService = async ({email, password}:IUserLogin) => {
         {expiresIn: '12h'}
     )
 
-    return token
+    return {user,token}
 }
 
 export default userLoginService
