@@ -1,52 +1,60 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 import { Gallery } from "./galleries.entities";
 import { User } from "./users.entities";
 import { Comment } from "./comments.entities";
 
 @Entity("vehicles")
 export class Vehicle {
-	@PrimaryGeneratedColumn("uuid")
-	id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-	@Column()
-	advertiseType: boolean;
+  @Column()
+  advertiseType: boolean;
 
-	@Column()
-	title: string;
+  @Column()
+  title: string;
 
-	@Column()
-	year: string;
+  @Column()
+  year: string;
 
-	@Column()
-	mileage: string;
+  @Column()
+  mileage: string;
 
-	@Column()
-	price: number;
+  @Column()
+  price: number;
 
-	@Column()
-	description: string;
+  @Column()
+  description: string;
 
-	@Column()
-	vehicleType: boolean;
+  @Column()
+  vehicleType: boolean;
 
-	@Column()
-	cover: string;
+  @Column()
+  cover: string;
 
-	@Column()
-	isActive: boolean;
+  @Column({ default: true })
+  isActive: boolean;
 
-	@CreateDateColumn()
-	created_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
 
-	@UpdateDateColumn()
-	updated_at: Date;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-	@ManyToOne(() => User, (user) => user.vehicles)
-	user: User;
+  @ManyToOne(() => User, (user) => user.vehicles)
+  user: User;
 
-	@OneToMany(() => Gallery, (image) => image.vehicle)
-	galleryImages: Gallery[];
+  @OneToMany(() => Gallery, (image) => image.vehicle)
+  galleryImages: Gallery[];
 
-	@OneToMany(() => Comment, (comment) => comment.vehicle)
-	comments: Comment[];
+  @OneToMany(() => Comment, (comment) => comment.vehicle)
+  comments: Comment[];
 }
