@@ -8,9 +8,9 @@ const listCommentsByVehicleService = async (id: string) => {
     where: {
       vehicle_id: id,
     },
-    relations:{
-      user: true
-    }
+    relations: {
+      user: true,
+    },
   });
 
   return comments;
