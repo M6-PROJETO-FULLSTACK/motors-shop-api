@@ -17,7 +17,6 @@ const createVehicleService = async (
     vehicleType,
     cover,
     gallery,
-    isActive,
   }: IVehicleRequest
 ): Promise<Vehicle> => {
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
@@ -37,7 +36,6 @@ const createVehicleService = async (
     description,
     vehicleType,
     cover,
-    isActive,
     user,
   });
 
