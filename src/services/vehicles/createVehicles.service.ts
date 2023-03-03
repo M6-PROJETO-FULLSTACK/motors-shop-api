@@ -37,6 +37,7 @@ const createVehicleService = async (
     vehicleType,
     cover,
     user,
+    isActive: true
   });
 
   await vehicleRepository.save(vehicle);
