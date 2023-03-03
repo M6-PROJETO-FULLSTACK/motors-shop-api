@@ -10,8 +10,8 @@ const commentsRoutes = Router();
 
 commentsRoutes.post(
   "/:id",
-  ensureAuthMiddleware,
   handleErrorMiddleware,
+  ensureAuthMiddleware,
   createCommentController
 );
 commentsRoutes.get(
