@@ -7,11 +7,13 @@ import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
 import updateVehiclesController from "../controllers/vehicles/updateVehicle.controller";
 import { createVehiclesControllers } from "../controllers/vehicles/createVehicle.controller";
 import { deleteVehicleController } from "../controllers/vehicles/deleteVehicle.controller";
+import listAllVehiclesToUserController from "../controllers/vehicles/listAllVehiclesToUser.controller";
 
 const vehiclesRoutes = Router();
 
 vehiclesRoutes.get("", handleErrorMiddleware, listVehiclesController);
 vehiclesRoutes.get("/:id", handleErrorMiddleware, listOneVehicleController);
+vehiclesRoutes.get("/user/:id", listAllVehiclesToUserController);
 
 vehiclesRoutes.post("", ensureAuthMiddleware, createVehiclesControllers);
 vehiclesRoutes.delete("/:id", ensureAuthMiddleware, deleteVehicleController);
