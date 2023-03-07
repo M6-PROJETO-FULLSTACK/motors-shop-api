@@ -11,9 +11,9 @@ import listAllVehiclesToUserController from "../controllers/vehicles/listAllVehi
 
 const vehiclesRoutes = Router();
 
-vehiclesRoutes.get("/user", ensureAuthMiddleware, listAllVehiclesToUserController);
 vehiclesRoutes.get("", handleErrorMiddleware, listVehiclesController);
 vehiclesRoutes.get("/:id", handleErrorMiddleware, listOneVehicleController);
+vehiclesRoutes.get("/user/:id", listAllVehiclesToUserController);
 
 vehiclesRoutes.post("", ensureAuthMiddleware, createVehiclesControllers);
 vehiclesRoutes.delete("/:id", ensureAuthMiddleware, deleteVehicleController);
