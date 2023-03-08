@@ -3,7 +3,7 @@ import { User } from "../../entities/users.entities"
 import { Vehicle } from "../../entities/vehicles.entities"
 import AppError from "../../errors/appError";
 
-export interface IVehicleProps {
+interface IVehicleProps {
     id: string;
     advertiseType: boolean;
     cover: string;
