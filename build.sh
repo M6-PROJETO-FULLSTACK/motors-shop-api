@@ -3,6 +3,6 @@
 set -o errexit
 
 yarn
-npm install -g tsc
+yarn add typescript --dev
 yarn build
 yarn typeorm migration:run -d dist/data-source
