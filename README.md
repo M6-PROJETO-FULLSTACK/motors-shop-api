@@ -38,6 +38,8 @@ POSTGRES_DB=
 HOST=localhost
 SECRET_KEY=
 PORT=5432
+DATABASE_URL="postgres://<user>:<password>@<host>:<port>/<database>"
+NODE_ENV=
 ```
 
 5. Run the migrations
