@@ -11,7 +11,7 @@
 		"typeorm": "typeorm-ts-node-commonjs",
 		"test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose --maxWorkers=1 --forceExit"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"@types/cors": "^2.8.13",
 		"@types/express": "^4.17.13",
 		"@types/jest": "^28.1.4",
@@ -27,9 +27,7 @@
 		"supertest": "^6.2.4",
 		"ts-jest": "^28.0.5",
 		"ts-node-dev": "^2.0.0",
-		"typescript": "^4.7.4"
-	},
-	"dependencies": {
+		"typescript": "^4.7.4",
 		"bcrypt": "^5.1.0",
 		"class-transformer": "^0.5.1",
 		"cors": "^2.8.5",
